@@ -1,0 +1,100 @@
+
+<div class="blog-posts">
+  <div class="search-widget">
+      <form class="flex flex-wrap align-items-center" [formGroup]="searchForm" (ngSubmit)="searchEbooksByTitle()">
+          <input type="search" placeholder="Search Ebooks" formControlName="title">
+          <button type="submit" class="flex justify-content-center align-items-center"><i class="fa fa-search"></i></button>
+      </form><!-- .flex -->
+      
+  </div><!-- .search-widget -->
+<div class="row mx-m-25" *ngIf="spinner">
+    <div class="col-12">
+        <header class=" heading flex justify-content-center align-items-center">
+         <app-spinner></app-spinner>
+        </header>
+      </div>
+</div>
+<div class="row mx-m-25" *ngIf="books && !spinner">
+  <div class="col-12 col-md-6 px-25" *ngFor="let book of books;">
+    <div class="blog-post-content">
+      <div class="blog-post-content-wrap">
+        <header class="entry-header">
+          <h2 class="entry-title"><a [routerLink]="['/books',book.id]">{{book.title}}</a></h2>
+
+          <div class="entry-meta flex align-items-center">
+            <div class="post-author">{{book.author}} </div>
+          </div><!-- .entry-meta -->
+        </header><!-- .entry-header -->
+        <figure class="blog-post-thumbnail position-relative m-0">
+          <a [routerLink]="['/books',book.id]"><img [src]="(baseURL+book.coverurl)" alt="book.title"></a>
+        </figure><!-- .blog-post-thumbnail -->
+        <div class="entry-content">
+          <p>
+              Book Name: {{book.title}} Author:  {{book.author}} Google Book ID: {{book.googlebookid}}
+              Open Library id: {{book.openlibraryid}} Year: {{book.year}} Pages: {{book.pages}} Language: {{book.language}} Edition: {{book.edition}} File format: {{book.extension}}
+              ....
+                 
+          </p>
+          <a [routerLink]="['/books',book.id]" class="download">Download {{book.extension  | uppercase }} </a>
+        </div><!-- .entry-content -->
+      </div><!-- .blog-post-content-wrap -->
+    </div><!-- .blog-post-content -->
+  </div><!-- .col -->
+</div><!-- .blog-posts -->
+<!-- </div> -->
+</div><!-- .col -->
+
+<div class="pagination flex flex-wrap justify-content-between align-items-center" *ngIf="!spinner">
+<div class="col-12 col-lg-4 order-2 order-lg-1 mt-3 mt-lg-0">
+  <!-- <ul>
+   <li *ngFor="let item of items$| async"> {{item.title}}</li>
+ </ul> -->
+  <ul class="flex flex-wrap align-items-center order-2 order-lg-1 p-0 m-0" *ngIf="(pages && pages >=3)">
+     <li class="active" [class.active]="(lBtn && currentPage>2 && currentPage<pages || currentPage == pages )" *ngIf="currentPage>3 && currentPage<pages || currentPage == pages"><a 
+      (click)="loadPage(currentPage-1,lbtns)"><i class="fa fa-angle-left"></i></a></li>
+    <li class="active" [class.active]="(currentPage==1)"><a  (click)="loadPage(1)">1</a></li>
+    <li class="active" [class.active]="(currentPage==2)"><a  (click)="loadPage(2)">2</a></li>
+    <li *ngIf="(pages>3 && currentPage < pages) ">...</li>
+    <li class="active" [class.active]="(currentPage==pages)" *ngIf="(pages>2 && currentPage < pages) "><a  (click)="loadPage(pages)">{{pages}}</a></li>
+    <li class="active" [class.active]="( rBtn && currentPage>2 && currentPage<pages &&  currentPage != pages)" *ngIf="currentPage<pages"><a 
+      (click)="loadPage(currentPage+1,rbtns)"><i class="fa fa-angle-right"></i></a></li>
+ 
+  </ul>
+  <!-- <ul *ngIf="(pages>3 && currentPage < pages-3) ">
+    <li>...</li>
+    <li class="active" [class.active]="(currentPage==pages-3)"><a  (click)="loadPage(pages-3)">{{pages-3}}</a></li>
+    <li class="active" [class.active]="(currentPage==pages-2)"><a  (click)="loadPage(pages-2)">{{pages-2}}</a></li>
+    <li class="active" [class.active]="(currentPage==pages-1)"><a  (click)="loadPage(pages-1)">{{pages-1}}</a></li>
+    
+  </ul> -->
+  <!-- <ul *ngIf="(currentPage >3 && currentPage <=pages) ">
+    <li>...</li>
+    <li class="active" [class.active]="(currentPage==currentPage-3)"><a  (click)="loadPage(currentPage-3)">{{currentPage-3}}</a></li>
+    <li class="active" [class.active]="(currentPage==currentPage-2)"><a  (click)="loadPage(currentPage-2)">{{currentPage-2}}</a></li>
+    <li class="active" [class.active]="(currentPage==currentPage-1)"><a  (click)="loadPage(currentPage-1)">{{currentPage-1}}</a></li>
+    
+  </ul> -->
+  <!-- <ul *ngIf="(pages>3) ">
+    
+  </ul>  -->
+  <ul class="flex flex-wrap align-items-center order-2 order-lg-1 p-0 m-0" *ngIf="(pages && pages > 1 && pages < 3)">
+    <li class="active" [class.active]="(currentPage==1)"><a  (click)="loadPage(1)">1</a></li>
+    <li class="active" [class.active]="(currentPage==2)"><a  (click)="loadPage(2)">2</a></li>
+  </ul>
+</div>
+
+<div class="col-12 flex justify-content-start justify-content-lg-end col-lg-8 order-1 order-lg-2" *ngIf="(pages && pages >=3)">
+  <div class="pagination-results flex flex-wrap align-items-center">
+    <p class="m-0">Page {{currentPage}} of {{pages}}</p>
+
+    <!-- <form>
+      <select>
+        <option>Show: 06</option>
+        <option>Show: 12</option>
+        <option>Show: 18</option>
+        <option>Show: 24</option>
+      </select>
+    </form> -->
+  </div><!-- .pagination-results -->
+</div>
+</div><!-- .pagination -->

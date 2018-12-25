@@ -1,0 +1,39 @@
+<div class="sidebar">
+  <div class="cat-links">
+      <h2>Categories</h2>
+
+      <ul class="p-0 m-0">
+            <li *ngFor="let topic of topics"><a href="">{{topic}}</a></li>
+      </ul>
+  </div><!-- .cat-links -->
+
+  <div class="latest-courses">
+      <h2>Popular Ebooks</h2>
+
+      <ul class="p-0 m-0" *ngIf="popularEbooks"> 
+          <li class="flex flex-wrap justify-content-between align-items-start" *ngFor="let p of popularEbooks">
+                <a [routerLink]="['/books',p.id]"><img [src]=(imageBaseURL+p.coverurl) alt="p.title"></a>
+
+              <div class="content-wrap">
+                  <h3><a [routerLink]="['/books',p.id]">{{p.title}}</a></h3>
+                  
+              </div><!-- .content-wrap -->
+          </li>
+
+          
+      </ul>
+  </div><!-- .latest-courses -->
+
+  <div class="ads">
+      <img src="./assets/images/ads.jpg" alt="">
+  </div><!-- .ads -->
+
+  <div class="popular-tags">
+      <h2>Popular Tags</h2>
+
+      <ul class="flex flex-wrap align-items-center p-0 m-0">
+          <li *ngFor="let tag of tags"><a href="">{{tag}}</a></li>
+         
+      </ul>
+  </div><!-- .popular-tags -->
+</div><!-- .sidebar -->
