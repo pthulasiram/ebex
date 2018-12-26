@@ -16,6 +16,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ErrorComponent } from './error/error.component';
 import {APP_BASE_HREF} from '@angular/common';
+import { CategoriesComponent } from './categories/categories.component';
 @NgModule({
   
   declarations: [
@@ -28,10 +29,11 @@ import {APP_BASE_HREF} from '@angular/common';
     BookDetialsComponent,
     SpinnerComponent,
     SidebarComponent,
-    ErrorComponent
+    ErrorComponent,
+    CategoriesComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserModule.withServerTransition({ appId: 'ebooksden' }),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase, 'ebooksden'),
     AngularFireDatabaseModule,

@@ -35,7 +35,7 @@ export class BookDetialsComponent implements OnInit {
   imageBaseURL: string = "";
   constructor(private router: Router,public activeRoute: ActivatedRoute, public bookService: BookService, public seoService:SeoService) {
     this.baseURL = bookService.getBasePath();
-    this.imageBaseURL = this.baseURL + "covers/";
+    this.imageBaseURL = "http://library1.org/covers/";
     this.downloadPath = "http://library1.org/_ads/";
   }
 
