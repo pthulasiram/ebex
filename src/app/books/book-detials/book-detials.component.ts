@@ -1,16 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { Book } from '../../shared/book';
 import { Popular } from '../../shared/popular';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { BookService } from '../../shared/book.service';
+import {environment} from './../../../environments/environment';
+import { SeoService } from '../../shared/seo.service';
+import { database } from 'firebase';
+import {formatDate} from '@angular/common';
+
 @Component({
   selector: 'app-book-detials',
   templateUrl: './book-detials.component.html',
   styleUrls: ['./book-detials.component.css']
 })
 export class BookDetialsComponent implements OnInit {
+  data: any = {
+    'title': 'EbookdDen - Free Medical, Engineering, Mechanical, Coputer Science eBooks Download',
+    'description': 'All eBooks available for download for free.Medical,Engineering,comics, Programming, Web Development, Computer Science books download in PDF,EPUB...',
+    'type': 'article',
+    'locale': 'en_US',
+    'url': '',
+    'site_name': environment.site_name,
+    
+  }
   book$:Observable<any>;
   spinner:boolean = true;
   book: Book[] = null;
@@ -19,13 +33,14 @@ export class BookDetialsComponent implements OnInit {
   baseURL: string = "";
   downloadPath:string="";
   imageBaseURL: string = "";
-  constructor(public activeRoute: ActivatedRoute, public bookService: BookService) {
+  constructor(private router: Router,public activeRoute: ActivatedRoute, public bookService: BookService, public seoService:SeoService) {
     this.baseURL = bookService.getBasePath();
     this.imageBaseURL = this.baseURL + "covers/";
     this.downloadPath = "http://library1.org/_ads/";
   }
 
   ngOnInit() {
+    this.data.url = environment.site_url+this.router.url;
     const queryParams = this.activeRoute.snapshot.queryParams
     const routeParams = this.activeRoute.snapshot.params;
     this.book$ = this.activeRoute.paramMap.pipe(
@@ -48,6 +63,7 @@ export class BookDetialsComponent implements OnInit {
       )
     ).subscribe(books => {
       this.book = books;
+      this.updateMetaData(this.book[0])
       this.spinner =false;
       if(this.book[0].title){
       this.listRelatedEbooks(this.book[0].topic);
@@ -116,6 +132,33 @@ export class BookDetialsComponent implements OnInit {
       this.bookService.updatePopularBook(pbooks.key$, pbooks);
     }
 
+  }
+  updateMetaData(book:Book){
+    this.data.title= book.title+' - PDF eBook Free Download';
+    this.data.description = book.title+' by '+ book.author+' you’ll learn a solid, rigorous, and practical understanding of '  +book.title+'. Free download pdf';
+    this.data['publisher']= book.publisher;
+    let tags:string[] = [];
+    tags.push(book.title);
+    tags.push(book.author);
+    tags.push(book.publisher);
+    tags.push(book.year);
+    tags.push(book.extension);
+    if(book.topic) {
+    let  topics:string[] = book.topic.split('///');
+    topics.forEach( x =>{
+      tags.push(x)
+    })
+    this.data['section']= book.topic;
+  }
+    tags.push('Free Ebook Download')
+    //tags.push(topics.toString())
+   //topics;
+   this.data['tags']=tags;
+   this.data['published_time']=formatDate(new Date(book.year), 'yyyy-MM-ddTHH:mm:ssZ', 'en');;
+   this.data['image']=this.imageBaseURL+book.coverurl;
+  // console.log(this.data.toString())
+
+    this.seoService.updateArticleMeta(this.data)   ;
   }
 
 }
