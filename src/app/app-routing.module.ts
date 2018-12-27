@@ -6,9 +6,14 @@ import { BookDetialsComponent } from './books/book-detials/book-detials.componen
 import { DmcaComponent } from './dmca/dmca.component';
 import { AppComponent } from './app.component';
 import { ErrorComponent } from './error/error.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { CategoriesDetailsComponent } from './categories/categories-details/categories-details.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
 
 const routes: Routes = [
 
+  
   {
     path: 'books', component: BooksComponent
   },
@@ -17,19 +22,34 @@ const routes: Routes = [
     component: BookDetialsComponent
   },
   {
+    path: 'about',
+    component: AboutComponent
+  },
+  {
+    path: 'contact',
+    component: ContactComponent
+  },
+  {
     path: 'dmca',
     component: DmcaComponent
   },
   {
-    path: '', 
-    redirectTo: 'books', 
-    pathMatch: 'full' 
- },
-
-
-
-
-
+    path: 'topics',
+    component: CategoriesComponent
+  },
+  {
+    path: 'topics/:id',
+    component: CategoriesDetailsComponent
+  },
+  {
+    path: '',
+    redirectTo: 'books',
+    pathMatch: 'full'
+  },
+  {
+    path:'**',
+    component:ErrorComponent
+  }
   // {
   //   path: '',
   //   redirectTo: '',
@@ -39,9 +59,6 @@ const routes: Routes = [
   //   path: '**',
   //   component: ErrorComponent
   // }
-
-
-
 ]
 
 @NgModule({

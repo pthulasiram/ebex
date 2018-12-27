@@ -37,6 +37,12 @@ export class BookService {
       .startAt(title)
       .endAt(title + '\uf8ff').limitToLast(40));
   }
+
+  getEbooksByTopic(topic: string): AngularFireList<Book> {
+    return this.db.list(this.dbPath, ref => ref.orderByChild('topic')
+      .startAt(topic)
+      .endAt(topic + '\uf8ff').limitToLast(40));
+  }
   getEbookByTopic(topic: string): AngularFireList<Book> {
     //console.log(topic)
     return this.db.list(this.dbPath, ref => ref.orderByChild('topic').equalTo(topic).limitToLast(2));
@@ -58,14 +64,13 @@ export class BookService {
   }
   getPopularEbookById(id: string): AngularFireList<Popular> {
 
-    return this.db.list(this.popularDbPath, ref => ref.orderByChild('title').equalTo(id).limitToFirst(1));
+    return this.db.list(this.popularDbPath, ref => ref.orderByChild('id').equalTo(id).limitToFirst(1));
   }
-  updatePopularBook(key: string, value: Popular): void {
-
-    this.popularEbooksRef.update(key, value).catch(error => this.handleError(error));
+  updatePopularBook(value: any): void {
+    this.popularEbooksRef.update(value.key, value).catch(error => this.handleError(error));
   }
 
   getTopTenPopularBooks(): AngularFireList<Popular> {
-    return this.db.list(this.popularDbPath, ref => ref.limitToLast(4));
+    return this.db.list(this.popularDbPath, ref => ref.orderByChild('hits').startAt(10));
   }
 }

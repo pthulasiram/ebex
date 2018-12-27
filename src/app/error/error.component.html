@@ -1,3 +1,29 @@
-<p>
-  error works!
-</p>
+<body class="blog-page">
+    <app-header></app-header>
+  
+    <div class="container">
+      <div class="row">
+  
+        <div class="col-12">
+          <div class="breadcrumbs">
+            <ul class="flex flex-wrap align-items-center p-0 m-0">
+              <li><a [routerLink]="['']"><i class="fa fa-home"></i> Home</a></li>
+              <li>Error</li>
+            </ul>
+          </div><!-- .breadcrumbs -->
+        </div><!-- .col -->
+  
+      </div><!-- .row -->
+  
+      <div class="row">
+        <div class="col-12 col-lg-8">
+         Page Not found
+         <img src="./assets/images/404.gif">
+        </div><!-- .col -->
+        <div class="col-12 col-lg-4">
+          <app-sidebar></app-sidebar>
+        </div><!-- .col -->
+      </div><!-- .row -->
+    </div><!-- .container -->
+    <app-footer></app-footer>
+  </body>

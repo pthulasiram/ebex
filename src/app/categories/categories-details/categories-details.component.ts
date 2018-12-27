@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { map,switchMap } from 'rxjs/operators';
 import { defineBase } from '@angular/core/src/render3';
 import {Book} from  '../../shared/book';
+import { Router,ActivatedRoute } from '@angular/router';
 import {BookService} from  '../../shared/book.service';
-
+import {environment} from '../../../environments/environment';
+import { SeoService } from '../../shared/seo.service';
 @Component({
-  selector: 'app-book-listing',
-  templateUrl: './book-listing.component.html',
-  styleUrls: ['./book-listing.component.css']
+  selector: 'app-categories-details',
+  templateUrl: './categories-details.component.html',
+  styleUrls: ['./categories-details.component.css']
 })
-export class BookListingComponent implements OnInit {
-
+export class CategoriesDetailsComponent implements OnInit {
   lbtns:string='lbtn';
   rbtns:string='rbtn';
   rBtn:boolean=false;
@@ -26,10 +26,19 @@ export class BookListingComponent implements OnInit {
   pages: number = 1;
   baseURL: string = 'http://libgen.io/covers/';
   spinner:boolean = true;
-  searchForm:FormGroup;
   submitted = false;
   success = false;
-  constructor(private bookService: BookService, private formBuilder: FormBuilder) {
+  category ="";
+  showNoBooks:boolean = false;
+  data: any = {
+    'title': 'EbookdDen - Free '+this.category+'eBooks Download',
+    'description': 'All '+this.category+' eBooks available for download for free. Books download in PDF,EPUB...',
+    'type': 'article',
+    'locale': 'en_US',
+    'url': environment.site_url,
+    'site_name': environment.site_name
+  }
+  constructor(private bookService: BookService, public activeRoute: ActivatedRoute, public seo:SeoService) {
 
   }
 
@@ -65,64 +74,42 @@ export class BookListingComponent implements OnInit {
     for (let i = (this.currentPage * this.no_books_page - this.no_books_page); i < (this.currentPage * this.no_books_page) && (i < this.totalBooks); i++) {
       this.books.push(this.result[i]);
     }
-    window.scrollTo(0,0)
-  }
-  ngOnInit() {
-    this.searchForm = this.formBuilder.group({
-      title: ['', Validators.required]
-    });
-    this.getEbookList();
-  }
-
-  getEbookList() {
-    // Use snapshotChanges().map() to store the key
-    this.bookService.getAllBooks().snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-      )
-    ).subscribe(books => {
-      this.result = books;
-
-      this.computePagination();
-      this.loadPage(this.currentPage);
-      this.spinner=false;
-    });
-  }
-
-  searchEbooksByTitle(){
-    this.result=[];
-    this.spinner=true;
-    this.submitted = true;
-    this.currentPage =1;
-    if (this.searchForm.invalid) {
-      this.getEbookList();
-        return;
-    }
-    console.log('searchig ebooks for '+this.searchForm.controls.title.value);
-  
-    this.bookService.getEbooksByTitle(this.searchForm.controls.title.value).snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-      )
-    ).subscribe(books => {
-      this.result = books;
-      if(this.result.length > 0){
-     // debugger
-      this.computePagination();
-      this.loadPage(this.currentPage);
-      this.spinner=false;
-      } 
-      else{
-        this.books =[];
-      }
-    });
-    this.success = true;
-    //this.searchForm.controls.title.setValue('')
-    //this.searchForm.reset;
     window.scrollTo(0,0);
   }
-  clear(){
-    this.searchForm.controls.title.setValue('')
+  ngOnInit() {
+    this.activeRoute.params.forEach(x => {
+      console.log(x.id)
+      this.category= x.id
+      this.getEbooksByTopic(x.id);
+    });
   }
+
+  getEbooksByTopic(topic:string){
+    window.scrollTo(0,0);
+    this.bookService.getEbooksByTopic(topic).snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+      )
+    ).subscribe(books => {
+      this.result = books;
+     // debugger;
+      this.computePagination();
+      this.loadPage(this.currentPage);
+      this.spinner=false;
+      if(this.result.length > 0){
+        this.showNoBooks = false;
+      }else {
+        this.showNoBooks = true
+        this.books =[];
+      }
+      console.log(this.result.length)
+    });
+    
+    this.seo.updatePageMeta(this.data);
+
+  }
+
+
+ 
 
 }

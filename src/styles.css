@@ -1410,6 +1410,17 @@ a.btn:hover {
 }
 
 /*
+# categories
+--------------------------------*/
+.course {
+    margin-top: 10px;
+}
+
+.course p {
+    max-width: 100%;
+}
+
+/*
 # Ads
 --------------------------------*/
 .ads {

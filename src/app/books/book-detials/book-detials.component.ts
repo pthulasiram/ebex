@@ -25,6 +25,7 @@ export class BookDetialsComponent implements OnInit {
     'site_name': environment.site_name,
     
   }
+  
   book$:Observable<any>;
   spinner:boolean = true;
   book: Book[] = null;
@@ -41,22 +42,24 @@ export class BookDetialsComponent implements OnInit {
 
   ngOnInit() {
     this.data.url = environment.site_url+this.router.url;
-    const queryParams = this.activeRoute.snapshot.queryParams
-    const routeParams = this.activeRoute.snapshot.params;
-    this.book$ = this.activeRoute.paramMap.pipe(
+    // const queryParams = this.activeRoute.snapshot.queryParams
+    // const routeParams = this.activeRoute.snapshot.params;
+     this.book$ = this.activeRoute.paramMap.pipe(
       switchMap( p => {
-        const id = p.get("id")
+        const id = p.get("id");
+        window.scrollTo(0,0);
         console.log(id);
        // this.getBookById(routeParams.id);
         return this.bookService.getEbookById(id).snapshotChanges();
       })
     
     );
-    this.getBookById(this.book$)
+   this.getBookById(this.book$)
 
   }
 
   getBookById(book$: Observable<any>) {
+   
     book$.pipe(
       map(changes =>
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
@@ -72,6 +75,7 @@ export class BookDetialsComponent implements OnInit {
       }
       this.updatePopularEbooks(this.book[0]);
     });
+   
   }
 
   listRelatedEbooks(topic: string) {
@@ -107,34 +111,53 @@ export class BookDetialsComponent implements OnInit {
     this.book[0] = this.rbooks[index];
     this.activeRoute.snapshot.params.id = this.book[0].id;
   }
+
   updatePopularEbooks(book: Book) {
     let pbooks: Popular = null;
-
-    this.bookService.getPopularEbookById(book.title).snapshotChanges().pipe(
+    let upatePBooks:boolean = true;
+    let addPbook:boolean = true;
+    this.bookService.getPopularEbookById(book.id).snapshotChanges().pipe(
       map(changes =>
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
       )
     ).subscribe(books => {
       pbooks = books[0];
+      if (pbooks == null && addPbook) {
+        pbooks = new Popular();
+        pbooks.id = book.id;
+        pbooks.title = book.title;
+        pbooks.coverurl = book.coverurl;
+        // pbooks.key = book.key;
+        pbooks.hits = 1;
+        this.bookService.addPopularBook(pbooks);
+        addPbook=false;
+      } else if(upatePBooks){
+        pbooks.hits = pbooks.hits + 1;
+        this.bookService.updatePopularBook(pbooks);
+        upatePBooks=false;
+      }
+    
     });
 
-    if (pbooks == null) {
-      pbooks = new Popular();
-      pbooks.id = book.id;
-      pbooks.title = book.title;
-      pbooks.coverurl = book.coverurl;
-      // pbooks.key = book.key;
-      pbooks.hits = 1;
-      this.bookService.addPopularBook(pbooks);
-    } else {
-      //  debugger
-      pbooks.hits = pbooks.hits + 1;
-      this.bookService.updatePopularBook(pbooks.key$, pbooks);
-    }
+    
 
   }
   updateMetaData(book:Book){
-    this.data.title= book.title+' - PDF eBook Free Download';
+    if(Number(book.edition)){
+
+      let edition:string=''
+      let ed:Number = Number(book.edition);
+      if( (ed > 1) && (ed < 10)){
+        edition = ed +' nd Edition'
+      } else if(ed > 9){
+        edition = ed +' th Edition'
+      } else{
+        edition = ed +' st Edition'
+      }
+     this.data.title= book.title+' '+edition+' - PDF eBook Free Download';
+    }else{
+      this.data.title= book.title+' - PDF eBook Free Download';
+    }
     this.data.description = book.title+' by '+ book.author+' you’ll learn a solid, rigorous, and practical understanding of '  +book.title+'. Free download pdf';
     this.data['publisher']= book.publisher;
     let tags:string[] = [];
@@ -159,6 +182,7 @@ export class BookDetialsComponent implements OnInit {
   // console.log(this.data.toString())
 
     this.seoService.updateArticleMeta(this.data)   ;
+    this.book[0].title=this.data.title;
   }
 
 }

@@ -8,7 +8,7 @@
         <div class="breadcrumbs">
           <ul class="flex flex-wrap align-items-center p-0 m-0">
             <li><a [routerLink]="['']"><i class="fa fa-home"></i> Home</a></li>
-            <li>categories</li>
+            <li>About</li>
           </ul>
         </div><!-- .breadcrumbs -->
       </div><!-- .col -->
@@ -17,16 +17,21 @@
 
     <div class="row">
       <div class="col-12 col-lg-8">
-        <div class="container">
-          <div class="row">
-            <div *ngFor="let c of topics; let i=index" class="col-12 col-md-6 card" >
-                <a [routerLink]="['/topics',c]">
-               <div class="card-body">
-                 {{c}}
-              </div></a>
-            </div>
-          </div>
-        </div>
+        About
+        There is collection of thousands of eBooks on Ebooksden.com. This websites index all Technology
+        Biology,
+        Business,
+        Chemistry,
+        Computers,
+        Economy,
+        Education,
+        Mathematics,
+        Medicine,
+        Physics ebooks from all over the internet. This site doesn’t own any file or never hosted any book on its
+        server. Ebooksden.in is just an Index of books available online.
+
+        Download All related eBooks in PDF,Epub format for free. Reproduction of site books is authorized only for
+        informative purposes and strictly for personal, private use.
       </div><!-- .col -->
       <div class="col-12 col-lg-4">
         <app-sidebar></app-sidebar>

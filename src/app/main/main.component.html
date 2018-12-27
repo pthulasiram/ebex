@@ -1,0 +1,59 @@
+<body class="blog-page">
+    <app-header></app-header>
+  
+    <div class="container">
+      <div class="row">
+  
+        <div class="col-12">
+          <div class="breadcrumbs">
+            <ul class="flex flex-wrap align-items-center p-0 m-0">
+              <li><a [routerLink]="['']"><i class="fa fa-home"></i> Home</a></li>
+              <li>About</li>
+            </ul>
+          </div><!-- .breadcrumbs -->
+        </div><!-- .col -->
+  
+      </div><!-- .row -->
+  
+      <div class="row">
+        <div class="col-12 col-lg-8">
+            <div class="search-widget">
+                <form class="flex flex-wrap align-items-center" [formGroup]="searchForm" (ngSubmit)="searchEbooksByTitle()">
+                    <input type="search" placeholder="Search Ebooks" formControlName="title">
+                    <button type="submit" class="flex justify-content-center align-items-center"><i class="fa fa-search"></i></button>
+                </form><!-- .flex -->
+                
+            </div><!-- .search-widget -->
+        </div><!-- .col -->
+        
+      </div><!-- .row -->
+    </div><!-- .container -->
+    <footer class="site-footer">
+        
+      
+        <div class="footer-bar">
+            <div class="container">
+                <div class="row flex-wrap justify-content-center justify-content-lg-between align-items-center">
+                    <div class="col-12 col-lg-6">
+                        <div class="download-apps flex flex-wrap justify-content-center justify-content-lg-start align-items-center">
+                            <!-- <a href="#"><img src="./assets/images/app-store.png" alt=""></a>
+                            <a href="#"><img src="./assets/images/play-store.png" alt=""></a> -->
+                            Copyright &copy; {{currentYear}} - <a [routerLink]="[ '' ]">EbooksDen.com</a>
+                          </div><!-- .download-apps -->
+      
+                    </div>
+      
+                    <div class="col-12 col-lg-6 mt-4 mt-lg-0">
+                        <div class="footer-bar-nav">
+                            <ul class="flex flex-wrap justify-content-center justify-content-lg-end align-items-center">
+                                <li><a href="#">DPA</a></li>
+                                <li><a [routerLink]="[ '/dmca' ]">Terms of Use</a></li>
+                                <li><a [routerLink]="[ '/dmca' ]">Privacy Policy</a></li>
+                            </ul>
+                        </div><!-- .footer-bar-nav -->
+                    </div><!-- .col-12 -->
+                </div><!-- .row -->
+            </div><!-- .container -->
+        </div><!-- .footer-bar -->
+      </footer><!-- .site-footer -->
+  </body>

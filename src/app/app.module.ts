@@ -17,6 +17,11 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { ErrorComponent } from './error/error.component';
 import {APP_BASE_HREF} from '@angular/common';
 import { CategoriesComponent } from './categories/categories.component';
+import { CategoriesDetailsComponent } from './categories/categories-details/categories-details.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+import { MainComponent } from './main/main.component';
+import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
 @NgModule({
   
   declarations: [
@@ -30,13 +35,18 @@ import { CategoriesComponent } from './categories/categories.component';
     SpinnerComponent,
     SidebarComponent,
     ErrorComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    CategoriesDetailsComponent,
+    AboutComponent,
+    ContactComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ebooksden' }),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase, 'ebooksden'),
     AngularFireDatabaseModule,
+    JwSocialButtonsModule,
     ReactiveFormsModule
 
   ],

@@ -3,7 +3,9 @@
       <h2>Categories</h2>
 
       <ul class="p-0 m-0">
-            <li *ngFor="let topic of topics"><a href="">{{topic}}</a></li>
+            <li *ngFor="let topic of topics">
+                    <a [routerLink]="['/topics',topic]">{{topic}}</a>
+            </li>
       </ul>
   </div><!-- .cat-links -->
 
@@ -32,7 +34,7 @@
       <h2>Popular Tags</h2>
 
       <ul class="flex flex-wrap align-items-center p-0 m-0">
-          <li *ngFor="let tag of tags"><a href="">{{tag}}</a></li>
+          <li *ngFor="let tag of tags"> <a [routerLink]="['/topics',tag]">{{tag}}</a></li>
          
       </ul>
   </div><!-- .popular-tags -->
