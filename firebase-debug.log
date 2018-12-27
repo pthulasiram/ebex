@@ -1,0 +1,93 @@
+[debug] [2018-12-27T10:45:46.583Z] ----------------------------------------------------------------------
+[debug] [2018-12-27T10:45:46.585Z] Command:       /usr/bin/node /usr/local/bin/firebase deploy
+[debug] [2018-12-27T10:45:46.585Z] CLI Version:   6.2.2
+[debug] [2018-12-27T10:45:46.585Z] Platform:      linux
+[debug] [2018-12-27T10:45:46.585Z] Node Version:  v8.10.0
+[debug] [2018-12-27T10:45:46.586Z] Time:          Thu Dec 27 2018 16:15:46 GMT+0530 (IST)
+[debug] [2018-12-27T10:45:46.586Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-12-27T10:45:46.592Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-12-27T10:45:46.592Z] > authorizing via signed-in user
+[debug] [2018-12-27T10:45:46.592Z] [iam] checking project ebooksden-4c77a for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2018-12-27T10:45:46.593Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/ebooksden-4c77a:testIamPermissions  
+
+[debug] [2018-12-27T10:45:48.510Z] <<< HTTP RESPONSE 200
+[debug] [2018-12-27T10:45:48.515Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/ebooksden-4c77a  
+ 
+[debug] [2018-12-27T10:45:49.229Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'ebooksden-4c77a'...
+[info] 
+[info] i  deploying functions, hosting
+[debug] [2018-12-27T10:45:50.847Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase serve --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "firebase-admin": "~6.0.0",
+    "firebase-functions": "^2.1.0",
+    "@angular/animations": "~7.1.0",
+    "@angular/common": "~7.1.0",
+    "@angular/compiler": "~7.1.0",
+    "@angular/core": "~7.1.0",
+    "@angular/fire": "^5.1.1",
+    "@angular/forms": "~7.1.0",
+    "@angular/http": "~7.1.0",
+    "@angular/platform-browser": "~7.1.0",
+    "@angular/platform-browser-dynamic": "~7.1.0",
+    "@angular/platform-server": "~7.1.0",
+    "@angular/router": "~7.1.0",
+    "jw-angular-social-buttons": "^1.0.0",
+    "@nguniversal/express-engine": "^7.0.2",
+    "@nguniversal/module-map-ngfactory-loader": "v7.0.2",
+    "core-js": "^2.5.4",
+    "express": "^4.15.2",
+    "firebase": "^5.7.1",
+    "rxjs": "~6.3.3",
+    "tslib": "^1.9.0",
+    "zone.js": "~0.8.26"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[debug] [2018-12-27T10:45:50.848Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/ebooksden-4c77a?view=CONSUMER_VIEW  
+ 
+[debug] [2018-12-27T10:45:50.848Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/ebooksden-4c77a?view=CONSUMER_VIEW  
+ 
+[debug] [2018-12-27T10:45:53.441Z] <<< HTTP RESPONSE 200
+[debug] [2018-12-27T10:45:53.484Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2018-12-27T10:45:53.488Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/ebooksden-4c77a  
+ 
+[debug] [2018-12-27T10:45:55.320Z] <<< HTTP RESPONSE 200
+[debug] [2018-12-27T10:45:55.322Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/690754521255:getServerAppConfig  
+ 
+[debug] [2018-12-27T10:45:56.011Z] <<< HTTP RESPONSE 200
+[debug] [2018-12-27T10:45:56.014Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/ebooksden-4c77a/versions  
+
+[debug] [2018-12-27T10:45:58.333Z] <<< HTTP RESPONSE 200
+[info] i  functions: preparing functions directory for uploading...
+[debug] [2018-12-27T10:45:58.338Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/ebooksden-4c77a/configs  
+ 
+[debug] [2018-12-27T10:46:00.144Z] <<< HTTP RESPONSE 200
+[info] i  functions: packaged functions (5.08 MB) for uploading
+[debug] [2018-12-27T10:46:01.397Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/ebooksden-4c77a/locations/us-central1/functions:generateUploadUrl  
+ 
+[debug] [2018-12-27T10:46:02.496Z] <<< HTTP RESPONSE 200
+[debug] [2018-12-27T10:46:02.497Z] >>> HTTP REQUEST PUT https://storage.googleapis.com/gcf-upload-us-central1-85252c95-83d1-4d4a-9bb3-48f4fa3cd2c8/96099929-ebec-4fa2-9dca-4c9323141cea.zip?GoogleAccessId=service-690754521255@gcf-admin-robot.iam.gserviceaccount.com&Expires=1545909362&Signature=sj3EzR2Ywk121nBK6iGLRrh6z5nURHXNRQGNWKAeKWMdF%2Bq3EU65CX8bLs9JY7x5GQW3vD7gThfd%2BsFBEAB9fDoE8mj0CFIM8JOm7F2rLMlawj%2FCHh2Ec8AsIcVqPSR8UPx4ApxPDf2KaCatbYV4VuBPMbrk1mO6PvOTPg1BUrfnbSy3j0NJZV3j3BEsN0eZfiVR7HHBvH0T%2Bg%2FNZSaVgdZ0l29V5hWibecq%2FORCmZ8UHGtzT92ZrfdJ3NC6DQ3eW6c2ree9voCRhc3LvUSKbLM3YQAKW6T1mNdkPuMZ7GNX6h3DwRIFZFKHpj8sSc4j%2BdJdRty6NIlZor1houQWzQ%3D%3D  
+
+[debug] [2018-12-27T10:46:05.560Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: functions folder uploaded successfully
+[info] i  hosting[ebooksden-4c77a]: beginning deploy...
+[info] i  hosting[ebooksden-4c77a]: found 118 files in public
+[debug] [2018-12-27T10:46:05.613Z] [hosting] hash cache [cHVibGlj] load error: lines is not defined
+[debug] [2018-12-27T10:46:05.907Z] [hosting] hash cache [cHVibGlj] stored for 118 files
+[debug] [2018-12-27T10:46:05.907Z] [hosting][hash queue][FINAL]
+[debug] [2018-12-27T10:46:05.907Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/ebooksden-4c77a/versions/f79b129515b55807:populateFiles  
+ <request body omitted>

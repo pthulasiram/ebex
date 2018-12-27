@@ -20,7 +20,6 @@ import { CategoriesComponent } from './categories/categories.component';
 import { CategoriesDetailsComponent } from './categories/categories-details/categories-details.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
-import { MainComponent } from './main/main.component';
 import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
 @NgModule({
   
@@ -39,7 +38,6 @@ import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
     CategoriesDetailsComponent,
     AboutComponent,
     ContactComponent,
-    MainComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ebooksden' }),
