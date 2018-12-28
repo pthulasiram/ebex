@@ -9,7 +9,11 @@ export const environment = {
     storageBucket: 'ebooksden-4c77a.appspot.com',
     messagingSenderId: '690754521255'
   },
-  externalPath: 'http://libgen.io/',
+  externalPath: 'http://library1.org/',
   downloadPath:'http://libgen.io/get.php?md5=',
-  site_url:'www.ebooksden.com'
+  site_url:'www.ebooksden.com',
+  site_config:{
+    imagePath:'http://library1.org/covers/',
+    dPath:'http://library1.org/_ads/'
+  }
 };

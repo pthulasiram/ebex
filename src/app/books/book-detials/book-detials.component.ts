@@ -36,8 +36,8 @@ export class BookDetialsComponent implements OnInit {
   imageBaseURL: string = "";
   constructor(private router: Router,public activeRoute: ActivatedRoute, public bookService: BookService, public seoService:SeoService) {
     this.baseURL = bookService.getBasePath();
-    this.imageBaseURL = "http://library1.org/covers/";
-    this.downloadPath = "http://library1.org/_ads/";
+    this.imageBaseURL = environment.site_config.imagePath;
+    this.downloadPath = environment.site_config.dPath;
   }
 
   ngOnInit() {
@@ -47,7 +47,6 @@ export class BookDetialsComponent implements OnInit {
      this.book$ = this.activeRoute.paramMap.pipe(
       switchMap( p => {
         const id = p.get("id");
-        window.scrollTo(0,0);
         console.log(id);
        // this.getBookById(routeParams.id);
         return this.bookService.getEbookById(id).snapshotChanges();
@@ -158,6 +157,7 @@ export class BookDetialsComponent implements OnInit {
     }else{
       this.data.title= book.title+' - PDF eBook Free Download';
     }
+    
     this.data.description = book.title+' by '+ book.author+' you’ll learn a solid, rigorous, and practical understanding of '  +book.title+'. Free download pdf';
     this.data['publisher']= book.publisher;
     let tags:string[] = [];
@@ -167,11 +167,11 @@ export class BookDetialsComponent implements OnInit {
     tags.push(book.year);
     tags.push(book.extension);
     if(book.topic) {
-    let  topics:string[] = book.topic.split('///');
+    let  topics:string[] = book.topic.split('\\');
     topics.forEach( x =>{
       tags.push(x)
     })
-    this.data['section']= book.topic;
+    this.data['section']= book.topic.replace('\\\\',"");
   }
     tags.push('Free Ebook Download')
     //tags.push(topics.toString())
@@ -183,6 +183,7 @@ export class BookDetialsComponent implements OnInit {
 
     this.seoService.updateArticleMeta(this.data)   ;
     this.book[0].title=this.data.title;
+       
   }
 
 }

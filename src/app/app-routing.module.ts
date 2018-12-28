@@ -10,16 +10,21 @@ import { CategoriesComponent } from './categories/categories.component';
 import { CategoriesDetailsComponent } from './categories/categories-details/categories-details.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
-
+import { BooksResolveService } from './books/book-detials/books-resolve.service';
 const routes: Routes = [
 
-  
+
   {
-    path: 'books', component: BooksComponent
+    path: 'books', component: BooksComponent,
+   
   },
   {
     path: 'books/:id',
-    component: BookDetialsComponent
+    component: BookDetialsComponent,
+    
+    // resolve: {
+    //   books: BooksResolveService
+    // }
   },
   {
     path: 'about',
@@ -47,8 +52,8 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path:'**',
-    component:ErrorComponent
+    path: '**',
+    component: ErrorComponent
   }
   // {
   //   path: '',
@@ -64,5 +69,8 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: "reload" })],
   exports: [RouterModule],
+  providers: [
+    BooksResolveService
+  ]
 })
 export class AppRoutingModule { }

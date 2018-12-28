@@ -118,8 +118,17 @@
           </table>
         </div><!-- .col -->
         <div class="col-12">
-          <header class=" heading flex justify-content-center align-items-center">
-            <a class="btn mt-4 mt-sm-0" [href]="downloadPath+book[0].md5" target="_blank">Download Ebook </a>
+            <header class=" heading flex justify-content-center align-items-center">
+              <a class="btn mt-4 mt-sm-0" [href]="downloadPath+book[0].md5" target="_blank">Download Ebook </a>
+            </header>
+          </div>
+
+        <div class="col-12">
+          <header class=" heading flex justify-content-center align-items-center social">
+              <fb-like url={{data.url}}></fb-like>
+              <google-plus url={{data.url}} ></google-plus>
+              <tweet url={{data.url}} text={{data.url}}></tweet>
+              <linkedin-share url={{data.url}}></linkedin-share>
           </header>
         </div>
         <div class="col-12" *ngIf="showRbooks">

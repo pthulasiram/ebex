@@ -45,6 +45,9 @@ export class BookService {
   }
   getEbookByTopic(topic: string): AngularFireList<Book> {
     //console.log(topic)
+    if(topic == undefined){
+      topic='';
+    }
     return this.db.list(this.dbPath, ref => ref.orderByChild('topic').equalTo(topic).limitToLast(2));
   }
   listRelatedBooks(): AngularFireList<Book> {

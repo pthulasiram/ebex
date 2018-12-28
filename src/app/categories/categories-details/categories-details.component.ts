@@ -74,7 +74,6 @@ export class CategoriesDetailsComponent implements OnInit {
     for (let i = (this.currentPage * this.no_books_page - this.no_books_page); i < (this.currentPage * this.no_books_page) && (i < this.totalBooks); i++) {
       this.books.push(this.result[i]);
     }
-    window.scrollTo(0,0);
   }
   ngOnInit() {
     this.activeRoute.params.forEach(x => {
@@ -85,7 +84,6 @@ export class CategoriesDetailsComponent implements OnInit {
   }
 
   getEbooksByTopic(topic:string){
-    window.scrollTo(0,0);
     this.bookService.getEbooksByTopic(topic).snapshotChanges().pipe(
       map(changes =>
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))

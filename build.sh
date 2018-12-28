@@ -1,5 +1,7 @@
 #!/bin/sh
 # This is a comment!
+rm -rf public
+rm -rf /functions/dist
 echo prod build started 
 ng build --prod
 echo ' ===================== executing  ng run ebooksden:server ====================='

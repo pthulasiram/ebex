@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { defineBase } from '@angular/core/src/render3';
 import {Book} from  '../../shared/book';
 import {BookService} from  '../../shared/book.service';
-
+import {environment} from '../../../environments/environment'
 @Component({
   selector: 'app-book-listing',
   templateUrl: './book-listing.component.html',
@@ -24,7 +24,7 @@ export class BookListingComponent implements OnInit {
   no_books_page: number = 4;
   currentPage: number = 1;
   pages: number = 1;
-  baseURL: string = 'http://libgen.io/covers/';
+  baseURL: string = environment.site_config.imagePath;
   spinner:boolean = true;
   searchForm:FormGroup;
   submitted = false;
@@ -65,7 +65,7 @@ export class BookListingComponent implements OnInit {
     for (let i = (this.currentPage * this.no_books_page - this.no_books_page); i < (this.currentPage * this.no_books_page) && (i < this.totalBooks); i++) {
       this.books.push(this.result[i]);
     }
-    window.scrollTo(0,0)
+  
   }
   ngOnInit() {
     this.searchForm = this.formBuilder.group({
@@ -119,7 +119,6 @@ export class BookListingComponent implements OnInit {
     this.success = true;
     //this.searchForm.controls.title.setValue('')
     //this.searchForm.reset;
-    window.scrollTo(0,0);
   }
   clear(){
     this.searchForm.controls.title.setValue('')

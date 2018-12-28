@@ -8,12 +8,8 @@
     ],
     "rewrites": [
       {
-        "source" : "**/*.@(css|js/images)",
-        "destination": "/index2.html"
-      },
-      {
         "source": "**",
-        "function": "ssr"
+        "destination": "/index.html"
       }
     ]
   }
