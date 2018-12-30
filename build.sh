@@ -3,6 +3,7 @@
 rm -rf public
 rm -rf /functions/dist
 echo prod build started 
+#ng build --prod
 ng build --prod
 echo ' ===================== executing  ng run ebooksden:server ====================='
 ng run ebooksden:server

@@ -3,6 +3,8 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { Book } from './book';
 import { Popular } from './popular';
 import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
+import {HttpClient, HttpRequest, HttpEvent} from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +15,7 @@ export class BookService {
   popularEbooksRef: AngularFireList<Popular> = null;
   maxBooks = 40;
 
-  constructor(private db: AngularFireDatabase) {
+  constructor(private db: AngularFireDatabase, private http:HttpClient) {
     this.booksRef = db.list(this.dbPath);
     this.popularEbooksRef = db.list(this.popularDbPath);
   }
@@ -75,5 +77,9 @@ export class BookService {
 
   getTopTenPopularBooks(): AngularFireList<Popular> {
     return this.db.list(this.popularDbPath, ref => ref.orderByChild('hits').startAt(10));
+  }
+
+  getEImg(path:string): Observable<any> {
+    return this.http.get(path);
   }
 }

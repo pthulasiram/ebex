@@ -9,20 +9,22 @@ import { DmcaComponent } from './dmca/dmca.component';
 import { BooksComponent } from './books/books.component';
 import { BookListingComponent } from './books/book-listing/book-listing.component';
 import { BookDetialsComponent } from './books/book-detials/book-detials.component';
-import {environment} from '../environments/environment';
+import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
-import {AngularFireDatabaseModule} from '@angular/fire/database';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ErrorComponent } from './error/error.component';
-import {APP_BASE_HREF} from '@angular/common';
+import { APP_BASE_HREF } from '@angular/common';
 import { CategoriesComponent } from './categories/categories.component';
 import { CategoriesDetailsComponent } from './categories/categories-details/categories-details.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
+import { AdsenseModule } from 'ng2-adsense';
+import { HttpClientModule } from '@angular/common/http'
 @NgModule({
-  
+
   declarations: [
     AppComponent,
     HeaderComponent,
@@ -42,8 +44,12 @@ import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
   imports: [
     BrowserModule.withServerTransition({ appId: 'ebooksden' }),
     AppRoutingModule,
+    AdsenseModule.forRoot({
+      adClient: 'ca-pub-1958898085199553'
+    }),
     AngularFireModule.initializeApp(environment.firebase, 'ebooksden'),
     AngularFireDatabaseModule,
+    HttpClientModule,
     JwSocialButtonsModule,
     ReactiveFormsModule
 

@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "ebooksden-91dca"
+    "staging": "ebooksden-91dca",
+    "production": "ebooksden-91dca"
   }
 }

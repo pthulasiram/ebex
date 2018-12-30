@@ -1,3 +1,10 @@
 .social{
     margin-top: 40px;
 }
+.ads{
+        background-color:aliceblue;
+        margin: 1px;
+        text-align: center;
+        border-radius: 4px;
+        height: 80%;
+}

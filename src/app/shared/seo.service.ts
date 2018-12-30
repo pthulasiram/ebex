@@ -16,28 +16,30 @@ export class SeoService {
     private meta: Meta) { }
 
   updatePageMeta(data: any) {
-    this.removeMetaTags();
+   console.log(data);
+   //debugger
+    //this.removeMetaTags();
     this.title.setTitle(data.title);
 
-    this.meta.removeTag('name = "description"');
+    //this.meta.removeTag('name = "description"');
     this.meta.updateTag({
       name: 'description', content: data.description,
     });
     this.meta.updateTag({
-      property: 'og.locale', content: data.locale,
+      property: 'og:locale', content: data.locale,
     });
     this.meta.updateTag({
-      property: 'og.type', content: data.type,
+      property: 'og:type', content: data.type,
     });
     this.meta.updateTag({
-      property: 'og.title', content: data.title,
+      property: 'og:title', content: data.title,
     });
     this.meta.updateTag({
-      property: 'og.url', content: data.url,
+      property: 'og:url', content: data.url,
     });
 
     this.meta.updateTag({
-      property: 'og.site_name', content: data.site_name,
+      property: 'og:site_name', content: data.site_name,
     });
 
 
@@ -119,7 +121,7 @@ export class SeoService {
       property: 'article:publisher', content: data.publisher,
     });
 
-    // //this.meta.removeTag('article:tag');
+    //this.meta.removeTag('article:tag');
 
     // data.tags.forEach(element => {
     //   if (element != undefined && element != "") {

@@ -3,6 +3,7 @@ require('zone.js/dist/zone-node');
 const functions = require('firebase-functions');
 const express = require('express');
 const path = require('path');
+const compression = require('compression');
 const { enableProdMode } = require('@angular/core');
 const { renderModuleFactory } = require('@angular/platform-server');
 
@@ -15,7 +16,7 @@ const index = require('fs')
   .toString();
 
 let app = express();
-
+//app.use(compression());
 app.get('**', function(req, res) {
   renderModuleFactory(AppServerModuleNgFactory, {
     url: req.path,

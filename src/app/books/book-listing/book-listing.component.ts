@@ -29,6 +29,7 @@ export class BookListingComponent implements OnInit {
   searchForm:FormGroup;
   submitted = false;
   success = false;
+  showNoBooks:boolean = false;
   constructor(private bookService: BookService, private formBuilder: FormBuilder) {
 
   }
@@ -74,6 +75,10 @@ export class BookListingComponent implements OnInit {
     this.getEbookList();
   }
 
+   public getImg(path:string):Observable<any>{
+    this.bookService.getEImg(path).subscribe(x => console.log(x))
+     return this.bookService.getEImg(path)
+   }
   getEbookList() {
     // Use snapshotChanges().map() to store the key
     this.bookService.getAllBooks().snapshotChanges().pipe(
@@ -82,10 +87,16 @@ export class BookListingComponent implements OnInit {
       )
     ).subscribe(books => {
       this.result = books;
-
+      this.spinner=false;
+      if(this.result.length > 0){
+        this.showNoBooks = false;
+      }else {
+        this.showNoBooks = true
+        this.books =[];
+      }
       this.computePagination();
       this.loadPage(this.currentPage);
-      this.spinner=false;
+      
     });
   }
 

@@ -27,6 +27,14 @@
   
       </div><!-- .row -->
     <div class="row" *ngIf="!spinner&&book">
+        <div class="col-12" *ngIf="showNoBooks">
+            <div class=" heading flex justify-content-center align-items-center">
+              No records found  for the book title  {{book[0].title}}  . Try with different Book.......
+              
+                <h5 class="entry-title"><a [routerLink]="['/topics']"> Click here </a></h5>
+              
+            </div>
+          </div>
       <div class="col-12 col-lg-8">
         <!-- <div class="col-12 col-lg-8" *ngIf="book"> -->
         <div class="col-12">
@@ -37,18 +45,20 @@
 
             <div class="instructor-short-info flex flex-wrap">
               <div class="instructors-stats">
-                <img [src]="(imageBaseURL+book[0].coverurl)" alt="">
+                <img [src]="(imageBaseURL+book[0].coverurl)" [alt]="book[0].title">
 
               </div><!-- .instructors-stats -->
 
               <div class="instructors-details">
-                <div class="entry-content mt-3">
-                    <p>
+                <div class="entry-content mt-3 ads">
+                  Ad Here
+                  <ng-adsense></ng-adsense>
+                    <!-- <p>
                         Book Name: {{book[0].title}} Author:  {{book[0].author}} Google Book ID: {{book[0].googlebookid}}
                         Open Library id: {{book[0].openlibraryid}} Year: {{book[0].year}} Pages: {{book[0].pages}} Language: {{book[0].language}} Edition: {{book[0].edition}} File format: {{book[0].extension}}
                         ....
                            
-                    </p>
+                    </p> -->
                 </div><!-- .entry-content -->
               </div><!-- .instructors-details -->
             </div><!-- .instructor-short-info -->
@@ -150,7 +160,7 @@
 
                         <div class="course-date">{{rbooks[0].year}}</div>
                         <figure class="course-thumbnail">
-                          <a [routerLink]="['/books',rbooks[0].id]"><img [src]=(imageBaseURL+rbooks[0].coverurl) alt="rbooks[0].title"></a>
+                          <a [routerLink]="['/books',rbooks[0].id]"><img [src]=(imageBaseURL+rbooks[0].coverurl) [alt]="rbooks[0].title"></a>
                         </figure><!-- .course-thumbnail -->
 
                       </div><!-- .course-date -->
@@ -173,7 +183,7 @@
 
                         <div class="course-date">{{rbooks[1].year}}</div>
                         <figure class="course-thumbnail">
-                          <a [routerLink]="['/books',rbooks[1].id]"><img [src]="(imageBaseURL+rbooks[1].coverurl)" alt="rbooks[1].title"></a>
+                          <a [routerLink]="['/books',rbooks[1].id]"><img [src]="(imageBaseURL+rbooks[1].coverurl)" [alt]="rbooks[1].title"></a>
                         </figure><!-- .course-thumbnail -->
                       </div><!-- .course-date -->
                     </header><!-- .entry-header -->

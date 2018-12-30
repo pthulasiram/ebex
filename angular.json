@@ -20,15 +20,14 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              "src/googlee2d44d7158e8937b.html"
+              "src/robots.txt",
+              "src/sitemap.xml",
+              "src/assets"
             ],
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [
-             
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -53,7 +52,8 @@
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
                 }
-              ]
+              ],
+              "serviceWorker": true
             }
           }
         },

@@ -44,7 +44,7 @@
                     </div><!-- .entry-meta -->
                   </header><!-- .entry-header -->
                   <figure class="blog-post-thumbnail position-relative m-0">
-                    <a [routerLink]="['/books',book.id]"><img [src]="(baseURL+book.coverurl)" alt="book.title"></a>
+                    <a [routerLink]="['/books',book.id]"><img [src]="(baseURL+book.coverurl)" [alt]="book.title"></a>
                   </figure><!-- .blog-post-thumbnail -->
                   <div class="entry-content">
                     <p>

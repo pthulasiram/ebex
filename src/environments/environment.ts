@@ -13,6 +13,12 @@ export const environment = {
     projectId: "ebooksden-91dca",
     storageBucket: "ebooksden-91dca.appspot.com",
     messagingSenderId: "355154509416"
+    // apiKey: "AIzaSyDyyvLXBYg95v5Bf34l0_aLM61JjgG0jV8",
+    // authDomain: "ebooksden-91dca.firebaseapp.com",
+    // databaseURL: "https://ebooksden-91dca.firebaseio.com",
+    // projectId: "ebooksden-91dca",
+    // storageBucket: "ebooksden-91dca.appspot.com",
+    // messagingSenderId: "690754521255"
   },
   externalPath: 'http://library1.org/',
   site_url:'www.ebooksden.com',

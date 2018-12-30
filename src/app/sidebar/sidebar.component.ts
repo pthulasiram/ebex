@@ -52,7 +52,7 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getEbookList()
+   // this.getEbookList()
   }
 
   getEbookList() {
