@@ -1,0 +1,125 @@
+<body class="blog-page">
+  <app-header></app-header>
+
+  <div class="container">
+    <div class="row">
+
+      <div class="col-12">
+        <div class="breadcrumbs">
+          <ul class="flex flex-wrap align-items-center p-0 m-0">
+            <li><a [routerLink]="['']"><i class="fa fa-home"></i> Home</a></li>
+          </ul>
+        </div><!-- .breadcrumbs -->
+      </div><!-- .col -->
+
+    </div><!-- .row -->
+    <div class="row">
+      <div class="col-12 col-lg-8">
+        <div class="search-widget" *ngIf="!isBanner">
+          <input type="search" placeholder="Search Ebooks ..." (keydown)="search($event)">
+        </div>
+        <div class="row" *ngIf="spinner && !isBanner">
+            <div class="col-12">
+              <header class=" heading flex justify-content-center align-items-center">
+                <app-spinner></app-spinner>
+              </header>
+            </div>
+
+        </div>
+        <div class ="col-12 col-lg-6" style="margin:10px; align-content: center" *ngIf="isBanner">
+            <app-spinner></app-spinner>
+            <img src="./assets/images/happy_new_year.gif" alt=" happy new year 2019">
+            
+        </div>
+        <div class="row" *ngIf="(!spinner&&books&&!isBanner)">
+          <div class="col-12 course-content-wrap-books" *ngFor="let book of books">
+            <div class="instructors-info">
+              <header class="entry-heading">
+                <a [routerLink]="[ '/books', book.id ]"><p> <b class="book-title">{{book.title}} </b> By <i class="author">{{book.author}}</i> </p> </a>
+              </header><!-- .entry-heading -->
+              
+              <div class="instructor-short-info flex flex-wrap">
+                <div class="instructors-stats">
+                  <a [routerLink]="[ '/books', book.id ]"><img [src]="(baseURL+book.coverurl)" [alt]="book.title" height="60%" width="60%"></a>
+
+                </div><!-- .instructors-stats -->
+
+                <div class="instructors-details">
+                  <div class="entry-content mt-3">
+
+                    <p>
+                      Book Name: {{book.title}} Author: {{book.author}} Google Book ID: {{book.googlebookid}}
+                      Open Library id: {{book.openlibraryid}} Year: {{book.year}} Pages: {{book.pages}}
+                      Language: {{book.language}} Edition: {{book.edition}} File format: {{book.extension}}
+                      ....
+
+                    </p>
+                    <a [routerLink]="['/books',book.id]" class="download">Download {{book.extension | uppercase }} </a>
+                  </div><!-- .entry-content -->
+                </div><!-- .instructors-details -->
+              </div><!-- .instructor-short-info -->
+            </div>
+          </div>
+        </div> <!-- .row-->
+        <div class="pagination flex flex-wrap justify-content-between align-items-center" *ngIf="!isBanner&&!spinner && pages > 0">
+            <div class="col-12 col-lg-4 order-2 order-lg-1 mt-3 mt-lg-0">
+              <!-- <ul>
+             <li *ngFor="let item of items$| async"> {{item.title}}</li>
+           </ul> -->
+              <ul class="flex flex-wrap align-items-center order-2 order-lg-1 p-0 m-0" *ngIf="(pages && pages >=3)">
+                <li class="active" [class.active]="(lBtn && currentPage>2 && currentPage<pages || currentPage == pages )" *ngIf="currentPage>3 && currentPage<pages || currentPage == pages"><a
+                    (click)="loadPage(currentPage-1,lbtns)"><i class="fa fa-angle-left"></i></a></li>
+                <li class="active" [class.active]="(currentPage==1)"><a (click)="loadPage(1)">1</a></li>
+                <li class="active" [class.active]="(currentPage==2)"><a (click)="loadPage(2)">2</a></li>
+                <li *ngIf="(pages>3 && currentPage < pages) ">...</li>
+                <li class="active" [class.active]="(currentPage==pages)" *ngIf="(pages>2 && currentPage < pages) "><a (click)="loadPage(pages)">{{pages}}</a></li>
+                <li class="active" [class.active]="( rBtn && currentPage>2 && currentPage<pages &&  currentPage != pages)" *ngIf="currentPage<pages"><a
+                    (click)="loadPage(currentPage+1,rbtns)"><i class="fa fa-angle-right"></i></a></li>
+          
+              </ul>
+              <!-- <ul *ngIf="(pages>3 && currentPage < pages-3) ">
+              <li>...</li>
+              <li class="active" [class.active]="(currentPage==pages-3)"><a  (click)="loadPage(pages-3)">{{pages-3}}</a></li>
+              <li class="active" [class.active]="(currentPage==pages-2)"><a  (click)="loadPage(pages-2)">{{pages-2}}</a></li>
+              <li class="active" [class.active]="(currentPage==pages-1)"><a  (click)="loadPage(pages-1)">{{pages-1}}</a></li>
+              
+            </ul> -->
+              <!-- <ul *ngIf="(currentPage >3 && currentPage <=pages) ">
+              <li>...</li>
+              <li class="active" [class.active]="(currentPage==currentPage-3)"><a  (click)="loadPage(currentPage-3)">{{currentPage-3}}</a></li>
+              <li class="active" [class.active]="(currentPage==currentPage-2)"><a  (click)="loadPage(currentPage-2)">{{currentPage-2}}</a></li>
+              <li class="active" [class.active]="(currentPage==currentPage-1)"><a  (click)="loadPage(currentPage-1)">{{currentPage-1}}</a></li>
+              
+            </ul> -->
+              <!-- <ul *ngIf="(pages>3) ">
+              
+            </ul>  -->
+              <ul class="flex flex-wrap align-items-center order-2 order-lg-1 p-0 m-0" *ngIf="(pages && pages > 1 && pages < 3)">
+                <li class="active" [class.active]="(currentPage==1)"><a (click)="loadPage(1)">1</a></li>
+                <li class="active" [class.active]="(currentPage==2)"><a (click)="loadPage(2)">2</a></li>
+              </ul>
+            </div>
+          
+            <div class="col-12 flex justify-content-start justify-content-lg-end col-lg-8 order-1 order-lg-2" *ngIf="(pages && pages >=3)">
+              <div class="pagination-results flex flex-wrap align-items-center">
+                <p class="m-0">Page {{currentPage}} of {{pages}}</p>
+          
+                <!-- <form>
+                <select>
+                  <option>Show: 06</option>
+                  <option>Show: 12</option>
+                  <option>Show: 18</option>
+                  <option>Show: 24</option>
+                </select>
+              </form> -->
+              </div><!-- .pagination-results -->
+            </div>
+          </div><!-- .pagination -->
+      </div> <!-- .col-->
+      <div class="col-12 col-lg-4">
+        <app-sidebar></app-sidebar>
+      </div><!-- .col -->
+    </div><!-- .row -->
+  </div><!-- .container -->
+  <app-footer></app-footer>
+</body>

@@ -1,0 +1,11 @@
+
+src/app/app-routing.module.ts src/app/app.component.ts src/app/app.module.ts src/app/books/book-detials/book-detials.component.css src/app/books/book-detials/book-detials.component.html src/app/books/book-detials/book-detials.component.ts src/app/books/book-listing/book-listing.component.html src/app/books/book-listing/book-listing.component.ts
+ src/app/books/books.component.ts
+ src/app/categories/categories-details/categories-details.component.html
+ src/app/shared/book.service.ts
+ src/app/shared/seo.service.ts
+ src/app/sidebar/sidebar.component.html
+ src/app/sidebar/sidebar.component.ts
+ src/environments/environment.prod.ts
+ src/environments/environment.ts
+ src/index.html

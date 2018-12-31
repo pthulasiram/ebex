@@ -45,6 +45,7 @@ export class BookListingComponent implements OnInit {
         this.rBtn=false;
       }
     }
+    window.scrollTo(0,0);
     console.log(this.currentPage + ' ------------------------');
   }
 
@@ -124,6 +125,7 @@ export class BookListingComponent implements OnInit {
       this.spinner=false;
       } 
       else{
+        this.spinner=false;
         this.books =[];
       }
     });

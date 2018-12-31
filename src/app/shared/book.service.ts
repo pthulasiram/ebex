@@ -4,7 +4,7 @@ import { Book } from './book';
 import { Popular } from './popular';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
-import {HttpClient, HttpRequest, HttpEvent} from '@angular/common/http';
+import { HttpClient, HttpRequest, HttpEvent } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +15,7 @@ export class BookService {
   popularEbooksRef: AngularFireList<Popular> = null;
   maxBooks = 40;
 
-  constructor(private db: AngularFireDatabase, private http:HttpClient) {
+  constructor(private db: AngularFireDatabase, private http: HttpClient) {
     this.booksRef = db.list(this.dbPath);
     this.popularEbooksRef = db.list(this.popularDbPath);
   }
@@ -31,9 +31,17 @@ export class BookService {
   getAllBooks(): AngularFireList<Book> {
     return this.db.list(this.dbPath, ref => ref.limitToLast(this.maxBooks));
   }
+
+  searchEbooksByTitle(start, end): Observable<any> {
+    return this.db.list(this.dbPath, ref => ref.orderByChild('title')
+      .startAt(start)
+      .endAt("\uf8ff" + end + "\uf8ff")
+      .limitToFirst(40)).valueChanges();
+  }
   getEbookById(id: string): AngularFireList<Book> {
     return this.db.list(this.dbPath, ref => ref.orderByChild('id').equalTo(id).limitToFirst(1));
   }
+  
   getEbooksByTitle(title: string): AngularFireList<Book> {
     return this.db.list(this.dbPath, ref => ref.orderByChild('title')
       .startAt(title)
@@ -42,13 +50,13 @@ export class BookService {
 
   getEbooksByTopic(topic: string): AngularFireList<Book> {
     return this.db.list(this.dbPath, ref => ref.orderByChild('topic')
-      .startAt(topic)
-      .endAt(topic + '\uf8ff').limitToLast(40));
+      .startAt( topic)
+      .endAt('\uf8ff' + topic + '\uf8ff').limitToLast(40));
   }
   getEbookByTopic(topic: string): AngularFireList<Book> {
     //console.log(topic)
-    if(topic == undefined){
-      topic='';
+    if (topic == undefined) {
+      topic = '';
     }
     return this.db.list(this.dbPath, ref => ref.orderByChild('topic').equalTo(topic).limitToLast(2));
   }
@@ -79,7 +87,7 @@ export class BookService {
     return this.db.list(this.popularDbPath, ref => ref.orderByChild('hits').startAt(10));
   }
 
-  getEImg(path:string): Observable<any> {
+  getEImg(path: string): Observable<any> {
     return this.http.get(path);
   }
 }

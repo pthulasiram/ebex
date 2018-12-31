@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule,FormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -22,7 +22,9 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
 import { AdsenseModule } from 'ng2-adsense';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { HomeComponent } from './home/home.component'
 @NgModule({
 
   declarations: [
@@ -40,6 +42,7 @@ import { HttpClientModule } from '@angular/common/http'
     CategoriesDetailsComponent,
     AboutComponent,
     ContactComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ebooksden' }),
@@ -50,8 +53,10 @@ import { HttpClientModule } from '@angular/common/http'
     AngularFireModule.initializeApp(environment.firebase, 'ebooksden'),
     AngularFireDatabaseModule,
     HttpClientModule,
+    FormsModule,
     JwSocialButtonsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
 
   ],
   providers: [],

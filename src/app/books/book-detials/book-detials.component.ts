@@ -132,29 +132,47 @@ export class BookDetialsComponent implements OnInit {
     let pbooks: Popular = null;
     let upatePBooks: boolean = true;
     let addPbook: boolean = true;
-    this.bookService.getPopularEbookById(book.id).snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-      )
-    ).subscribe(books => {
-      pbooks = books[0];
-      if (pbooks == null && addPbook) {
-        pbooks = new Popular();
-        pbooks.id = book.id;
-        pbooks.title = book.title;
-        pbooks.coverurl = book.coverurl;
-        // pbooks.key = book.key;
-        pbooks.hits = 1;
-        this.bookService.addPopularBook(pbooks);
-        addPbook = false;
-      } else if (upatePBooks) {
-        pbooks.hits = pbooks.hits + 1;
-        this.bookService.updatePopularBook(pbooks);
-        upatePBooks = false;
-      }
+    // this.bookService.getPopularEbookById(book.id).snapshotChanges().pipe(
+    //   map(changes =>
+    //     changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+    //   )
+    // ).subscribe(books => {
+    //   pbooks = books[0];
+    //   if (pbooks == null && addPbook) {
+    //     pbooks = new Popular();
+    //     pbooks.id = book.id;
+    //     pbooks.title = book.title;
+    //     pbooks.coverurl = book.coverurl;
+    //     // pbooks.key = book.key;
+    //     pbooks.hits = 1;
+    //     this.bookService.addPopularBook(pbooks);
+    //     addPbook = false;
+    //   } else if (upatePBooks) {
+    //     pbooks.hits = pbooks.hits + 1;
+    //     this.bookService.updatePopularBook(pbooks);
+    //     upatePBooks = false;
+    //   }
 
-    });
+    // });
 
+this.bookService.getPopularEbookById(book.id).valueChanges().subscribe(books => {
+  pbooks = books[0];
+  if (pbooks == null && addPbook) {
+    pbooks = new Popular();
+    pbooks.id = book.id;
+    pbooks.title = book.title;
+    pbooks.coverurl = book.coverurl;
+    // pbooks.key = book.key;
+    pbooks.hits = 1;
+    this.bookService.addPopularBook(pbooks);
+    addPbook = false;
+  } else if (upatePBooks) {
+    pbooks.hits = pbooks.hits + 1;
+    this.bookService.updatePopularBook(pbooks);
+    upatePBooks = false;
+  }
+
+});
 
   }
   updateMetaData(book: Book) {

@@ -10,9 +10,12 @@ import { CategoriesComponent } from './categories/categories.component';
 import { CategoriesDetailsComponent } from './categories/categories-details/categories-details.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
+import { HomeComponent } from './home/home.component';
 const routes: Routes = [
 
-
+  {
+    path: '', component: HomeComponent,
+  },
   {
     path: 'books', component: BooksComponent,
   },
@@ -44,11 +47,11 @@ const routes: Routes = [
     path: 'topics/:id',
     component: CategoriesDetailsComponent
   },
-  {
-    path: '',
-    redirectTo: 'books',
-    pathMatch: 'full'
-  },
+  // {
+  //   path: '',
+  //   redirectTo: 'books',
+  //   pathMatch: 'full'
+  // },
   {
     path: '**',
     component: ErrorComponent
