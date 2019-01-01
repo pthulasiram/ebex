@@ -11,6 +11,7 @@ import { CategoriesDetailsComponent } from './categories/categories-details/cate
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
+import { BooksResolver } from './books-resolver'
 const routes: Routes = [
 
   {
@@ -22,6 +23,9 @@ const routes: Routes = [
   {
     path: 'books/:id',
     component: BookDetialsComponent,
+    resolve: {
+      books_data: BooksResolver
+    }
     
     // resolve: {
     //   books: BooksResolveService
@@ -30,6 +34,7 @@ const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent
+    
   },
   {
     path: 'contact',
@@ -71,6 +76,7 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: "reload" })],
   exports: [RouterModule],
   providers: [
+    BooksResolver
   ]
 })
 export class AppRoutingModule { }

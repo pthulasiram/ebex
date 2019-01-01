@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SeoService } from '../shared/seo.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators'
 import { environment } from '../../environments/environment'
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
@@ -18,10 +19,10 @@ export class AboutComponent implements OnInit {
     'url': environment.site_url,
     'site_name': environment.site_name
   }
-  constructor(private seo: SeoService, public router: Router) { }
+ 
+  constructor(private seo: SeoService, public router: Router, public activateRoute:ActivatedRoute) { }
 
   ngOnInit() {
-
     this.data['image'] = './assets/images/logo.png';
     this.router.events
     .subscribe((event) => {

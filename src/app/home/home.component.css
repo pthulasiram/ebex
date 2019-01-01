@@ -28,6 +28,10 @@
     /* border: 1px solid #ebebeb; */
     background: #fff;
 }
+.banner{
+    width: calc(100% - 2px);
+    margin: 5px;
+}
 .book-title{
     font-size:22px;
     font-weight: bold;

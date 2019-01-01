@@ -12,5 +12,6 @@ cp -a functions/dist/browser/. public/
 mv public/index.html public/index2.html
 echo ' ===================== Public folder created. Ready to deploy  ====================='
 echo ' ===================== Initializing firebase deploy  ====================='
+cp src/sitemap* public/
 firebase deploy
 echo ' ===================== Complete deployment  ====================='

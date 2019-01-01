@@ -41,16 +41,16 @@ export class BookService {
   getEbookById(id: string): AngularFireList<Book> {
     return this.db.list(this.dbPath, ref => ref.orderByChild('id').equalTo(id).limitToFirst(1));
   }
-  
+
   getEbooksByTitle(title: string): AngularFireList<Book> {
     return this.db.list(this.dbPath, ref => ref.orderByChild('title')
-      .startAt(title)
+      .startAt(this.toCamelCase(title))
       .endAt(title + '\uf8ff').limitToLast(40));
   }
 
   getEbooksByTopic(topic: string): AngularFireList<Book> {
     return this.db.list(this.dbPath, ref => ref.orderByChild('topic')
-      .startAt( topic)
+      .startAt(topic)
       .endAt('\uf8ff' + topic + '\uf8ff').limitToLast(40));
   }
   getEbookByTopic(topic: string): AngularFireList<Book> {
@@ -89,5 +89,9 @@ export class BookService {
 
   getEImg(path: string): Observable<any> {
     return this.http.get(path);
+  }
+
+  toCamelCase(input: string) {
+    return input.replace(/\w\S*/g, (txt => txt[0].toUpperCase() + txt.substr(1).toLowerCase()));
   }
 }

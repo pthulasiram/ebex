@@ -30,6 +30,7 @@
     "@angular/service-worker": "~7.1.0",
     "@nguniversal/express-engine": "^7.0.2",
     "@nguniversal/module-map-ngfactory-loader": "v7.0.2",
+    "camelcase": "^5.0.0",
     "core-js": "^2.5.4",
     "express": "^4.15.2",
     "firebase": "^5.7.1",

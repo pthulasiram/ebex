@@ -6,19 +6,40 @@ import { debug } from 'util';
   providedIn: 'root'
 })
 export class SeoService {
-  remove_meta_article: string[] = ['og.locale',
-    'og.locale', 'og.type', 'og.type', 'og.title', 'og.url', 'og.site_name',
-    'data.publisher', 'article:section', 'article:published_time', 'og:image', 'article:tag',
-    'og:image:width', 'og:image:height', 'og:image:alt', 'twitter:card', 'twitter:description', 'twitter:url', 'twitter:title', 'twitter:image', 'twitter:site', 'twitter:creator'
+  remove_meta_article: string[] = [
+    'description',
+    'og:locale',
+    'og:type',
+    'og:title',
+    'og:description',
+    'og:url',
+    'og:site_name',
+    'article:publisher',
+    'article:section',
+    'article:published_time',
+    'og:image',
+    'og:image:width',
+    'og:image:height',
+    'og:image:alt',
+    'twitter:card',
+    'twitter:description',
+    'twitter:url',
+    'twitter:title',
+    'twitter:image',
+    'twitter:site',
+    'twitter:creator',
+    'article:tag'
+
+
   ];
 
   constructor(private title: Title,
     private meta: Meta) { }
 
   updatePageMeta(data: any) {
-   console.log(data);
-   //debugger
-    //this.removeMetaTags();
+    console.log(data);
+    //debugger
+    this.removeMetaTags();
     this.title.setTitle(data.title);
 
     //this.meta.removeTag('name = "description"');
@@ -91,9 +112,10 @@ export class SeoService {
   }
   // update article page
   updateArticleMeta(data: any) {
+    //debugger
     this.removeMetaTags();
     this.title.setTitle(data.title);
-    this.meta.removeTag('name = "description"');
+   // this.meta.removeTag('name = "description"');
     this.meta.updateTag({
       name: 'description', content: data.description,
     });
@@ -123,13 +145,13 @@ export class SeoService {
 
     //this.meta.removeTag('article:tag');
 
-    // data.tags.forEach(element => {
-    //   if (element != undefined && element != "") {
-    //     this.meta.addTag({
-    //       property: 'article:tag', content: element,
-    //     });
-    //   }
-    // });
+    data.tags.forEach(element => {
+      if (element != undefined && element != "") {
+        this.meta.addTag({
+          property: 'article:tag', content: element,
+        });
+      }
+    });
     this.meta.updateTag({
       property: 'article:section', content: data.section,
     });
@@ -179,7 +201,19 @@ export class SeoService {
 
   removeMetaTags() {
     this.remove_meta_article.forEach(x => {
-      this.meta.removeTag('property ="' + x + '"');
+      if (this.meta.getTag('property = "' + x + '"')) {
+        console.log('meta tags ' + x)
+        this.meta.removeTag('property = "' + x + '"');
+      } else if (x == "article:tag") {
+        if (this.meta.getTags('property = "' + x + '"')) {
+          this.meta.getTags('property = "' + x + '"').forEach(x =>{
+            this.meta.removeTagElement(x)
+            console.log('  elemenrt dsfasdgdgasdgd '+x)
+          }
+          )
+
+        }
+      }
     });
 
     // this.remove_meta_site.forEach(x =>{

@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
 import { Meta ,Title} from '@angular/platform-browser';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -32,7 +33,7 @@ export class HomeComponent implements OnInit {
 
   data: any = {
     'title': 'EbooksDen - Free IT, Medical, Engineering, Mechanical, Coputer Science eBooks Download',
-    'description': 'All eBooks available for download for free. Technology,Biology,Business,Chemistry,Computers,Economy,Education,Mathematics,Medicine,Physics, Programming, Web Development, Computer Science books download in PDF, EPUB...',
+    'description': 'All eBooks available for free download. Technology,Biology,Business,Chemistry,Computers,Economy,Education,Mathematics,Medicine,Physics, Programming, Web Development, Computer Science books download in PDF, EPUB...',
     'type': 'website',
     'locale': 'en_US',
     'url': environment.site_url,
@@ -43,6 +44,7 @@ export class HomeComponent implements OnInit {
   bookTitle: string = 'Google cloud';
   ngOnInit() {
     this.showBanner();
+    this.seo.updatePageMeta(this.data);
     this.books$ = this.bookService.searchEbooksByTitle(this.bookTitle, this.bookTitle);
     this.books$.subscribe(books => {
       this.result = books;
@@ -63,6 +65,7 @@ export class HomeComponent implements OnInit {
   search($event) {
     if ($event.timeStamp - this.lastKeypress > 200) {
       this.bookTitle = $event.target.value
+      //this.bookService.toCamelCase($event.target.value);
       this.books$ = this.bookService.searchEbooksByTitle(this.bookTitle, this.bookTitle);
       this.books$.subscribe(books => { this.result = books;
         if (this.result.length > 0) {
@@ -128,7 +131,7 @@ export class HomeComponent implements OnInit {
       //console.log("Hello from functionNr1 after setTimeout in code");
       } else {
         this.isBanner= false;
-        
+
       }
    
   }

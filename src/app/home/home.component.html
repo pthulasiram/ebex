@@ -28,14 +28,14 @@
         </div>
         <div class ="col-12 col-lg-6" style="margin:10px; align-content: center" *ngIf="isBanner">
             <app-spinner></app-spinner>
-            <img src="./assets/images/happy_new_year.gif" alt=" happy new year 2019">
+            <img class='banner' src="./assets/images/happy_new_year.gif" alt=" happy new year">
             
         </div>
         <div class="row" *ngIf="(!spinner&&books&&!isBanner)">
           <div class="col-12 course-content-wrap-books" *ngFor="let book of books">
             <div class="instructors-info">
               <header class="entry-heading">
-                <a [routerLink]="[ '/books', book.id ]"><p> <b class="book-title">{{book.title}} </b> By <i class="author">{{book.author}}</i> </p> </a>
+                <a [routerLink]="[ '/books', book.id ]"><p> <b class="book-title">{{book.title}} </b> <span *ngIf="book.author">By </span> <i class="author">{{book.author}}</i> </p> </a>
               </header><!-- .entry-heading -->
               
               <div class="instructor-short-info flex flex-wrap">

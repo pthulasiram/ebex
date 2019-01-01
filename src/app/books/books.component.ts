@@ -13,7 +13,7 @@ import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 export class BooksComponent implements OnInit {
   data: any = {
     'title': 'EbooksDen - Free IT, Medical, Engineering, Mechanical, Coputer Science eBooks Download',
-    'description': 'All eBooks available for download for free. Technology,Biology,Business,Chemistry,Computers,Economy,Education,Mathematics,Medicine,Physics, Programming, Web Development, Computer Science books download in PDF, EPUB...',
+    'description': 'All eBooks available for  free download. Technology,Biology,Business,Chemistry,Computers,Economy,Education,Mathematics,Medicine,Physics, Programming, Web Development, Computer Science books download in PDF, EPUB...',
     'type': 'website',
     'locale': 'en_US',
     'url': environment.site_url,
