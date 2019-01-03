@@ -37,18 +37,18 @@
               <div class="blog-post-content">
                 <div class="blog-post-content-wrap">
                   <header class="entry-header">
-                    <h2 class="entry-title"><a [routerLink]="['/books',book.id]">{{book.title}}</a></h2>
+                    <h2 class="entry-title"><a [routerLink]="['/books',book.id]">{{book.title | titlecase}}</a></h2>
 
                     <div class="entry-meta flex align-items-center">
                       <div class="post-author">{{book.author}} </div>
                     </div><!-- .entry-meta -->
                   </header><!-- .entry-header -->
                   <figure class="blog-post-thumbnail position-relative m-0">
-                    <a [routerLink]="['/books',book.id]"><img [src]="(baseURL+book.coverurl)" [alt]="book.title"></a>
+                    <a [routerLink]="['/books',book.id]"><img [src]="(baseURL+book.coverurl)" [alt]="book.title | titlecase"></a>
                   </figure><!-- .blog-post-thumbnail -->
                   <div class="entry-content">
                     <p>
-                      Book Name: {{book.title}} Author: {{book.author}} Google Book ID: {{book.googlebookid}}
+                      Book Name: {{book.title | titlecase}} Author: {{book.author}} Google Book ID: {{book.googlebookid}}
                       Open Library id: {{book.openlibraryid}} Year: {{book.year}} Pages: {{book.pages}} Language:
                       {{book.language}} Edition: {{book.edition}} File format: {{book.extension}}
                       ....

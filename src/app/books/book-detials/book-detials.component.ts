@@ -11,6 +11,7 @@ import { map, switchMap } from 'rxjs/operators';
 import { BookService } from '../../shared/book.service';
 import { database } from 'firebase';
 import { formatDate } from '@angular/common';
+import { ShareService } from '@ngx-share/core';
 
 @Component({
   selector: 'app-book-detials',
@@ -198,7 +199,7 @@ this.bookService.getPopularEbookById(book.id).valueChanges().subscribe(books => 
     if (Number(book.edition)) {
 
       let edition: string = ''
-      let ed: Number = Number(book.edition);
+      let ed: Number = Number(book.edition?book.edition:0);
       if ((ed > 1) && (ed < 10)) {
         edition = ed + ' nd Edition'
       } else if (ed > 9) {
@@ -230,7 +231,7 @@ this.bookService.getPopularEbookById(book.id).valueChanges().subscribe(books => 
     //tags.push(topics.toString())
     //topics;
     this.data.tags = tags;
-    this.data.published_time = formatDate(new Date(book.year), 'yyyy-MM-ddTHH:mm:ssZ', 'en');;
+    this.data.published_time = formatDate(new Date(book.year?book.year:new Date().getFullYear+""), 'yyyy-MM-ddTHH:mm:ssZ', 'en');;
     this.data.image = this.imageBaseURL + book.coverurl;
     // console.log(this.data.toString())
 

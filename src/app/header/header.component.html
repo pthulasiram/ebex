@@ -12,7 +12,7 @@
                     </div><!-- .col -->
 
                     <div class="col-3 col-lg-9 flex justify-content-end align-content-center">
-                        <nav class="site-navigation flex justify-content-end align-items-center">
+                        <nav class="site-navigation flex justify-content-end align-items-center" [ngClass]="{ 'show': navbarOpen }">
                             <ul class="flex flex-column flex-lg-row justify-content-lg-end align-content-center">
                                 <li><a routerLinkActive="active" [routerLink]="[ '']">Home</a></li>
                                 <li><a routerLinkActive="active" [routerLink]="[ '/books']">Books</a></li>
@@ -22,7 +22,7 @@
                                 <li><a routerLinkActive="active" [routerLink]="[ '/dmca']">DMCA</a></li>
                             </ul>
 
-                            <div class="hamburger-menu d-lg-none">
+                            <div class="hamburger-menu d-lg-none" (click)="toggleNavbar()">
                                 <span></span>
                                 <span></span>
                                 <span></span>

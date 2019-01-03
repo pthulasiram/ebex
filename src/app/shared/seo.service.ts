@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, PLATFORM_ID, APP_ID, Inject } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { debug } from 'util';
-
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 @Injectable({
   providedIn: 'root'
 })
@@ -34,13 +34,13 @@ export class SeoService {
   ];
 
   constructor(private title: Title,
-    private meta: Meta) { }
+    private meta: Meta,  @Inject(PLATFORM_ID) private platformId: Object) { }
 
   updatePageMeta(data: any) {
     console.log(data);
     //debugger
     this.removeMetaTags();
-    this.title.setTitle(data.title);
+    this.title.setTitle(this.toCamelCase(data.title));
 
     //this.meta.removeTag('name = "description"');
     this.meta.updateTag({
@@ -53,7 +53,7 @@ export class SeoService {
       property: 'og:type', content: data.type,
     });
     this.meta.updateTag({
-      property: 'og:title', content: data.title,
+      property: 'og:title', content: this.toCamelCase(data.title),
     });
     this.meta.updateTag({
       property: 'og:url', content: data.url,
@@ -75,7 +75,7 @@ export class SeoService {
       property: 'og:image:height', content: '499',
     });
     this.meta.updateTag({
-      property: 'og:image:alt', content: data.title,
+      property: 'og:image:alt', content: this.toCamelCase(data.title),
     });
 
 
@@ -103,7 +103,7 @@ export class SeoService {
       property: 'twitter:description', content: data.description,
     });
     this.meta.updateTag({
-      property: 'twitter:title', content: data.title,
+      property: 'twitter:title', content: this.toCamelCase(data.title),
     });
 
     this.meta.updateTag({
@@ -114,7 +114,7 @@ export class SeoService {
   updateArticleMeta(data: any) {
     //debugger
     this.removeMetaTags();
-    this.title.setTitle(data.title);
+    this.title.setTitle(this.toCamelCase(data.title));
    // this.meta.removeTag('name = "description"');
     this.meta.updateTag({
       name: 'description', content: data.description,
@@ -126,10 +126,10 @@ export class SeoService {
       property: 'og:type', content: data.type,
     });
     this.meta.updateTag({
-      property: 'og:title', content: data.title,
+      property: 'og:title', content: this.toCamelCase(data.title),
     });
     this.meta.updateTag({
-      property: 'og:description', content: data.title,
+      property: 'og:description', content: this.toCamelCase(data.title),
     });
     this.meta.updateTag({
       property: 'og:url', content: data.url,
@@ -169,7 +169,7 @@ export class SeoService {
       property: 'og:image:height', content: '499',
     });
     this.meta.updateTag({
-      property: 'og:image:alt', content: data.title,
+      property: 'og:image:alt', content: this.toCamelCase(data.title),
     });
 
     // twitter cards
@@ -185,7 +185,7 @@ export class SeoService {
       property: 'twitter:url', content: data.url,
     });
     this.meta.updateTag({
-      property: 'twitter:title', content: data.title,
+      property: 'twitter:title', content: this.toCamelCase(data.title),
     });
     this.meta.updateTag({
       property: 'twitter:image', content: data.image,
@@ -219,5 +219,16 @@ export class SeoService {
     // this.remove_meta_site.forEach(x =>{
     //   this.meta.removeTag('name ='+x); 
     // });
+  } 
+  //utility to move top
+  scrollTop(){
+    if (isPlatformBrowser(this.platformId)) {
+     // setInterval(() => {
+        window.scrollTo(0, 0)
+     // }, 16)
+    }
+  }
+  toCamelCase(input: string) {
+    return input.replace(/\w\S*/g, (txt => txt[0].toUpperCase() + txt.substr(1).toLowerCase()));
   }
 }

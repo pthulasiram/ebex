@@ -7,6 +7,7 @@ import { defineBase } from '@angular/core/src/render3';
 import {Book} from  '../../shared/book';
 import {BookService} from  '../../shared/book.service';
 import {environment} from '../../../environments/environment'
+import { SeoService } from 'src/app/shared/seo.service';
 @Component({
   selector: 'app-book-listing',
   templateUrl: './book-listing.component.html',
@@ -30,7 +31,7 @@ export class BookListingComponent implements OnInit {
   submitted = false;
   success = false;
   showNoBooks:boolean = false;
-  constructor(private bookService: BookService, private formBuilder: FormBuilder) {
+  constructor(private bookService: BookService, private seo:SeoService,  private formBuilder: FormBuilder) {
 
   }
 
@@ -45,7 +46,7 @@ export class BookListingComponent implements OnInit {
         this.rBtn=false;
       }
     }
-    window.scrollTo(0,0);
+    this.seo.scrollTop();
     console.log(this.currentPage + ' ------------------------');
   }
 

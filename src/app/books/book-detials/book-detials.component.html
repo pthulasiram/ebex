@@ -10,7 +10,7 @@
           <ul class="flex flex-wrap align-items-center p-0 m-0">
             <li><a [routerLink]="['']"><i class="fa fa-home"></i> Home</a></li>
             <li>Ebooks</li>
-            <li>{{book[0].title}}</li>
+            <li>{{book[0].title | titlecase}}</li>
           </ul>
         </div><!-- .breadcrumbs -->
       </div><!-- .col -->
@@ -29,7 +29,7 @@
     <div class="row" *ngIf="!spinner&&book">
         <div class="col-12" *ngIf="showNoBooks">
             <div class=" heading flex justify-content-center align-items-center">
-              No records found  for the book title  {{book[0].title}}  . Try with different Book.......
+              No records found  for the book title  {{book[0].title | titlecase}}  . Try with different Book.......
               
                 <h5 class="entry-title"><a [routerLink]="['/topics']"> Click here </a></h5>
               
@@ -40,12 +40,12 @@
         <div class="col-12">
           <div class="instructors-info">
             <header class="entry-heading">
-              <h2 class="entry-title">{{book[0].title}}</h2>
+              <h2 class="entry-title">{{book[0].title | titlecase}}</h2>
             </header><!-- .entry-heading -->
 
             <div class="instructor-short-info flex flex-wrap">
               <div class="instructors-stats">
-                <img [src]="(imageBaseURL+book[0].coverurl)" [alt]="book[0].title">
+                <img [src]="(imageBaseURL+book[0].coverurl)" [alt]="book[0].title | titlecase">
 
               </div><!-- .instructors-stats -->
 
@@ -67,7 +67,7 @@
             <thead class="thead-dark">
               <tr>
                 <th></th>
-                <th>{{book[0].title}}</th>
+                <th>{{book[0].title | titlecase}}</th>
 
               </tr>
             </thead>
@@ -135,10 +135,11 @@
 
         <div class="col-12">
           <header class=" heading flex justify-content-center align-items-center social">
-              <fb-like url={{data.url}}></fb-like>
+             <fb-like url={{data.url}}></fb-like>
               <google-plus url={{data.url}} ></google-plus>
               <tweet url={{data.url}} text={{data.url}}></tweet>
               <linkedin-share url={{data.url}}></linkedin-share>
+              
           </header>
         </div>
         <div class="col-12" *ngIf="showRbooks">
@@ -153,14 +154,14 @@
 
                   <div class="course-content-wrap">
                     <header class="entry-header">
-                      <h2 class="entry-title"><a [routerLink]="['/books',rbooks[0].id]">{{rbooks[0].title}}</a></h2>
+                      <h2 class="entry-title"><a [routerLink]="['/books',rbooks[0].id]">{{rbooks[0].title | titlecase}}</a></h2>
 
                       <div class="entry-meta flex flex-wrap align-items-center">
                         <div class="course-author">{{rbooks[0].author}}</div>
 
                         <div class="course-date">{{rbooks[0].year}}</div>
                         <figure class="course-thumbnail">
-                          <a [routerLink]="['/books',rbooks[0].id]"><img [src]=(imageBaseURL+rbooks[0].coverurl) [alt]="rbooks[0].title"></a>
+                          <a [routerLink]="['/books',rbooks[0].id]"><img [src]=(imageBaseURL+rbooks[0].coverurl) [alt]="rbooks[0].title | titlecase"></a>
                         </figure><!-- .course-thumbnail -->
 
                       </div><!-- .course-date -->
@@ -176,14 +177,14 @@
 
                   <div class="course-content-wrap">
                     <header class="entry-header">
-                      <h2 class="entry-title"><a [routerLink]="['/books',rbooks[1].id]">{{rbooks[1].title}}</a></h2>
+                      <h2 class="entry-title"><a [routerLink]="['/books',rbooks[1].id]">{{rbooks[1].title | titlecase}}</a></h2>
 
                       <div class="entry-meta flex flex-wrap align-items-center">
                         <div class="course-author">{{rbooks[1].author}}</div>
 
                         <div class="course-date">{{rbooks[1].year}}</div>
                         <figure class="course-thumbnail">
-                          <a [routerLink]="['/books',rbooks[1].id]"><img [src]="(imageBaseURL+rbooks[1].coverurl)" [alt]="rbooks[1].title"></a>
+                          <a [routerLink]="['/books',rbooks[1].id]"><img [src]="(imageBaseURL+rbooks[1].coverurl)" [alt]="rbooks[1].title | titlecase"></a>
                         </figure><!-- .course-thumbnail -->
                       </div><!-- .course-date -->
                     </header><!-- .entry-header -->

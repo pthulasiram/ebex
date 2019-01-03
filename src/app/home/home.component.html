@@ -35,12 +35,12 @@
           <div class="col-12 course-content-wrap-books" *ngFor="let book of books">
             <div class="instructors-info">
               <header class="entry-heading">
-                <a [routerLink]="[ '/books', book.id ]"><p> <b class="book-title">{{book.title}} </b> <span *ngIf="book.author">By </span> <i class="author">{{book.author}}</i> </p> </a>
+                <a [routerLink]="[ '/books', book.id ]"><p> <b class="book-title">{{book.title | titlecase}} </b> <span *ngIf="book.author">By </span> <i class="author">{{book.author}}</i> </p> </a>
               </header><!-- .entry-heading -->
               
               <div class="instructor-short-info flex flex-wrap">
                 <div class="instructors-stats">
-                  <a [routerLink]="[ '/books', book.id ]"><img [src]="(baseURL+book.coverurl)" [alt]="book.title" height="60%" width="60%"></a>
+                  <a [routerLink]="[ '/books', book.id ]"><img [src]="(baseURL+book.coverurl)" [alt]="book.title | titlecase" height="60%" width="60%"></a>
 
                 </div><!-- .instructors-stats -->
 
@@ -48,7 +48,7 @@
                   <div class="entry-content mt-3">
 
                     <p>
-                      Book Name: {{book.title}} Author: {{book.author}} Google Book ID: {{book.googlebookid}}
+                      Book Name: {{book.title | titlecase}} Author: {{book.author}} Google Book ID: {{book.googlebookid}}
                       Open Library id: {{book.openlibraryid}} Year: {{book.year}} Pages: {{book.pages}}
                       Language: {{book.language}} Edition: {{book.edition}} File format: {{book.extension}}
                       ....

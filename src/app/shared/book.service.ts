@@ -34,8 +34,8 @@ export class BookService {
 
   searchEbooksByTitle(start, end): Observable<any> {
     return this.db.list(this.dbPath, ref => ref.orderByChild('title')
-      .startAt(start)
-      .endAt("\uf8ff" + end + "\uf8ff")
+      .startAt(start.toLowerCase())
+      .endAt("\uf8ff" + end.toLowerCase() + "\uf8ff")
       .limitToFirst(40)).valueChanges();
   }
   getEbookById(id: string): AngularFireList<Book> {
@@ -44,7 +44,7 @@ export class BookService {
 
   getEbooksByTitle(title: string): AngularFireList<Book> {
     return this.db.list(this.dbPath, ref => ref.orderByChild('title')
-      .startAt(this.toCamelCase(title))
+      .startAt(title.toLowerCase())
       .endAt(title + '\uf8ff').limitToLast(40));
   }
 

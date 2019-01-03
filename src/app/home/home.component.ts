@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit {
   }
 
   search($event) {
-    if ($event.timeStamp - this.lastKeypress > 200) {
+    if ($event.timeStamp - this.lastKeypress > 100) {
       this.bookTitle = $event.target.value
       //this.bookService.toCamelCase($event.target.value);
       this.books$ = this.bookService.searchEbooksByTitle(this.bookTitle, this.bookTitle);
@@ -93,8 +93,8 @@ export class HomeComponent implements OnInit {
         this.lBtn = true;
         this.rBtn = false;
       }
-    }
-    window.scrollTo(0,0);
+    }//window.scrollTo(0,0);
+    this.seo.scrollTop();
     console.log(this.currentPage + ' ------------------------');
   }
 

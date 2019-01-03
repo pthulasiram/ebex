@@ -2,12 +2,12 @@ export const environment = {
   production: true,
   site_name:'EbooksDen',
   firebase: {
-    apiKey: "AIzaSyBobbTBr7a4hQE1IalY1V922ZrXHeMXZKI",
-    authDomain: "ebooksden-91dca.firebaseapp.com",
-    databaseURL: "https://ebooksden-91dca.firebaseio.com",
-    projectId: "ebooksden-91dca",
-    storageBucket: "ebooksden-91dca.appspot.com",
-    messagingSenderId: "355154509416"
+    apiKey: "AIzaSyBch5h4FhjItXnpDhYOo2SqVO5NOnazdvY",
+    authDomain: "ebooks-35945.firebaseapp.com",
+    databaseURL: "https://ebooks-35945.firebaseio.com",
+    projectId: "ebooks-35945",
+    storageBucket: "ebooks-35945.appspot.com",
+    messagingSenderId: "89084912276"
     // apiKey: "AIzaSyDyyvLXBYg95v5Bf34l0_aLM61JjgG0jV8",
     // authDomain: "ebooksden-4c77a.firebaseapp.com",
     // databaseURL: "https://ebooksden-4c77a.firebaseio.com",
